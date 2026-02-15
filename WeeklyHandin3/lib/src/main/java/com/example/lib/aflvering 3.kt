@@ -73,7 +73,79 @@ val articles = listOf(
 
     /*
     Opgave 6:
+open class Vehicle(
+    val brand: String, ----------- Ændret fra var til val
+    var speed: Int
+) {
+    fun accelerate() {
+        speed += 10
+        println("$brand speeds up to $speed km/h")
+    }
 
+    open fun honk() {
+        println("Beep!")
+    }
+}
+
+class Car(
+    brand: String,
+    speed: Int,
+    var fuelLevel: Int
+) : Vehicle(brand, speed) {
+
+    override fun honk() {
+        println("$brand goes: HONK HONK!")
+    }
+}
+
+class Bike(
+    brand: String,
+    speed: Int,
+    var bellSound: String
+) : Vehicle(brand, speed) {
+}
+
+
+// ------------ Manager ---------------
+
+class TrafficManager {
+
+    val vehicles: MutableList<Vehicle> = mutableListOf()
+
+    fun register(vehicle: Vehicle) {
+        vehicles.add(vehicle)
+    }
+
+    fun updateTraffic() {
+        for (v in vehicles) {
+            v.accelerate()
+
+            if (v is Car) { -------------- Man kunne evt. bruge when i stedet for if. Så man ikke behøver at skrive if hver gang til de fforskellige vehicles
+                v.fuelLevel -= 5
+                println("${v.brand} fuel left: ${v.fuelLevel}")
+            }
+
+            if (v is Bike) {
+                println("${v.brand} rings the bell: ${v.bellSound}")
+            }
+
+            if (v.speed > 120) {
+                println("${v.brand} is going too fast!")
+            }
+        }
+    }
+}
+
+
+// --------------- App -----------------
+
+fun main() {
+    val manager = TrafficManager()
+    manager.register(Car("Toyota", 50, fuelLevel = 80))
+    manager.register(Bike("Giant", 20, bellSound = "Ring ring!"))
+
+    manager.updateTraffic()
+}
      */
 
 }
